@@ -20,7 +20,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | BkSp   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |' / Cmd |
  * |--------+------+------+------+------+------| CTRL |           | OSM  |------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |ALTCTR|   N  |   M  |   ,  |   .  |//Ctrl| RShift |
+ * |Shft/Lck|   Z  |   X  |   C  |   V  |   B  |      |           |ALTCTR|   N  |   M  |   ,  |   .  |//Ctrl| RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |  L2  |  '"  |AltShf| Up   | Left |                                       | Right| Down |   [  |   ]  | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
@@ -36,11 +36,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_EQL,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_INS,
-        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   TG(SYMB),
-        KC_BSPC,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_LCTL,
-        TG(MDIA),       KC_QUOT,      LALT(KC_LSFT),  KC_UP,  KC_LEFT,
+        KC_EQL,                KC_1,     KC_2,   KC_3,   KC_4,   KC_5,   KC_INS,
+        KC_TAB,                KC_Q,     KC_W,   KC_E,   KC_R,   KC_T,   TG(SYMB),
+        KC_BSPC,               KC_A,     KC_S,   KC_D,   KC_F,   KC_G,
+        MT(MOD_LSFT, KC_CAPS), KC_Z,     KC_X,   KC_C,   KC_V,   KC_B,   KC_LCTRL,
+        TG(MDIA),              KC_QUOT,  LALT(KC_LSFT),  KC_UP,  KC_LEFT,
                                               ALT_T(KC_APP),  KC_LGUI,
                                                               KC_HOME,
                                                KC_SPC,KC_BSPC,KC_END,
@@ -165,28 +165,36 @@ void matrix_init_user(void) {
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
+    ergodox_right_led_1_on();
+    backlight_level(BACKLIGHT_LEVELS);
+    backlight_enable();
 };
 
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
 
-    uint8_t layer = biton32(layer_state);
-    //turn all LEDs off
-    ergodox_right_led_1_off();
-    ergodox_right_led_2_off();
-    ergodox_right_led_3_off();
-    switch (layer) {
-      // TODO: Make this relevant to the ErgoDox EZ.
-        case 1:
-            ergodox_right_led_2_on();
-            break;
-        case 2:
-            ergodox_right_led_3_on();
-            break;
-        default:
-            // none
-            ergodox_right_led_1_on();
-            break;
-    }
+
+};
+
+layer_state_t layer_state_set_user(layer_state_t state){
+    uint8_t layer = biton32(state);
+      //turn all LEDs off
+      ergodox_right_led_1_off();
+      ergodox_right_led_2_off();
+      ergodox_right_led_3_off();
+      switch (layer) {
+        // TODO: Make this relevant to the ErgoDox EZ.
+          case 1:
+              ergodox_right_led_2_on();
+              break;
+          case 2:
+              ergodox_right_led_3_on();
+              break;
+          default:
+              // none
+              ergodox_right_led_1_on();
+              break;
+      }
+    return state;
 };
