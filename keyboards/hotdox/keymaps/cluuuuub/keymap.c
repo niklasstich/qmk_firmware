@@ -19,8 +19,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |  L1  |           |  BL  |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | CAPS   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |' / Cmd |
- * |--------+------+------+------+------+------| CTRL |           | OSM  |------+------+------+------+------+--------|
- * |  LShft |   Z  |   X  |   C  |   V  |   B  |      |           |ALTCTR|   N  |   M  |   ,  |   .  |  /   | RShift |
+ * |--------+------+------+------+------+------| CTRL |           | RCTL |------+------+------+------+------+--------|
+ * |  LShft |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |  /   | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |  L2  |  '"  |CtlShf| Left | Down |                                       |  Up  | Right|   [  |   ]  | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_DEL,                  KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_MINS,
              BL_TOGG,                 KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
                                       KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,GUI_T(KC_QUOT),
-             OSM(MOD_LCTL | MOD_LALT),KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,   KC_RSFT,
+             KC_RALT,KC_N,   KC_M,  KC_COMM,KC_DOT, KC_SLSH,   KC_RSFT,
                                   KC_UP, KC_RIGHT,KC_LBRC,KC_RBRC,          KC_FN1,
              KC_LALT,        KC_ESC,
              KC_PGUP,
