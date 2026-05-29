@@ -289,14 +289,14 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     }
     // 0 is left-half encoder,
     // 1 is right-half encoder
-    if (index == 0) {
+    if (index == 1) {
         // Volume control
         if (clockwise) {
             tap_code(KC_VOLU);
         } else {
             tap_code(KC_VOLD);
         }
-    } else if (index == 1) {
+    } else if (index == 0) {
         // Page up/Page down
         if (clockwise) {
             tap_code(KC_PGDN);
