@@ -1,0 +1,1 @@
+void render_logo(void);
